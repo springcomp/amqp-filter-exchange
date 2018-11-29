@@ -49,8 +49,12 @@ get_msg(#delivery{message = Msg}) -> Msg.
 get_content(#basic_message{content = Content}) -> Content.
 get_props(#content{properties = Props}) -> Props.
 
-get_message_header(Content) ->
-    rabbit_basic:extract_headers(Content).
+get_message_header(Content) ->     
+    Headers = rabbit_basic:extract_headers(Content),
+    case Headers of
+        undefined -> [];
+        _ -> Headers        
+    end.
 
 add_new_headers(Headers, []) -> sort_headers(Headers);
 add_new_headers(Headers, [H|Tail]) ->

@@ -68,9 +68,12 @@ assert_args_equivalence(X, Args) ->
 %%====================================================================
 %% Internal functions
 
-
 get_message_header(Content) ->     
-    rabbit_basic:extract_headers(Content).
+    Headers = rabbit_basic:extract_headers(Content),
+    case Headers of
+        undefined -> [];
+        _ -> Headers        
+    end.
 
 update_and_send(Message, [Subscription | Tail]) ->
     update_and_send(Message, Subscription),
