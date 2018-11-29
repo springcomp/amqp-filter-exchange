@@ -48,7 +48,7 @@ route(#exchange{name = Name},
       #delivery{message = #basic_message{content = Content}} = Delivery) ->        
     
     Routes =  match_exchange(Name),
-    Headers = get_message_header(Content),
+    Headers = message_utils:get_message_header(Content),
     Properties = header_converter:convert(Headers),
     Subscriptions = filter(Routes, Properties),
     update_and_send(Delivery, Subscriptions),
@@ -68,23 +68,18 @@ assert_args_equivalence(X, Args) ->
 %%====================================================================
 %% Internal functions
 
-get_message_header(Content) ->     
-    Headers = rabbit_basic:extract_headers(Content),
-    case Headers of
-        undefined -> [];
-        _ -> Headers        
-    end.
-
+update_and_send(_, []) -> [];
 update_and_send(Message, [Subscription | Tail]) ->
     update_and_send(Message, Subscription),
     update_and_send(Message, Tail);
-update_and_send(_, []) -> [];
 update_and_send(Message, { Destination, Args }) ->
     NewMessage = message_utils:create_message(Message, Args),
-    Qs = rabbit_amqqueue:lookup([Destination]),
-    rabbit_amqqueue:deliver(Qs, NewMessage),
-    []
+    send_message(NewMessage, Destination)
     .
+
+send_message(NewMessage, Destination) -> 
+    Qs = rabbit_amqqueue:lookup([Destination]),
+    rabbit_amqqueue:deliver(Qs, NewMessage).
 
 match_exchange(Name) ->  
     MatchHead = #route{binding = #binding{

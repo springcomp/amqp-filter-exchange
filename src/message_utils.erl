@@ -84,9 +84,18 @@ convert_to_binary({ Key, { Type, Value }}) ->
 -ifdef(TEST).
 -include_lib("eunit/include/eunit.hrl").
 
-get_message_header_test() ->    
+get_message_with_undefined_header_returns_empty_array_test() ->           
+        Content = #content{properties = #'P_basic'{headers = undefined}},
+        ?assertEqual([], get_message_header(Content)).
+
+get_message_with_empty_header_test() ->    
     Content = #content{properties = #'P_basic'{headers = []}},
     ?assertEqual([], get_message_header(Content)).
+
+get_message_header_test() ->   
+        Headers = [{ <<"Name">>, longstr, <<"Nick">> }], 
+        Content = #content{properties = #'P_basic'{headers = Headers}},
+        ?assertEqual(Headers, get_message_header(Content)).
 
 convert_to_binary_one_action_test() ->
     Action = { "Name", { string_constant, "Nick" } },
