@@ -41,10 +41,14 @@ These _action_ are performed on the message inmediately before the message is ro
 The actual version of this plugin uses Erlang/OTP 20 and RabbitMQ 3.7.0.            
 
 ### RabbitMQ 3rd party plugin directories
-RabbitMQ 3rd party [plugin directories](https://www.rabbitmq.com/plugins.html#plugin-directories) will differ from platform to platform and installation method to installation method.
-This plugin takes this path from the variable _RABBITMQ_PLUGINS_DIR_ in the makefile. You must verify and change his default value if needed. 
-
-### Creating distribution files and deploy
+RabbitMQ 3rd party [plugin directories](https://www.rabbitmq.com/plugins.html#plugin-directories) will differ from platform to platform and installation method to installation method.     
+Plugin directory can be located by executing the following command:
+```
+rabbitmqctl eval 'application:get_env(rabbit, plugins_dir).'
+{ok,"/usr/lib/rabbitmq/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.7.7/plugins"}
+```
+The first directory in the example above is the 3rd party plugin directory. You must set this value to the _RABBITMQ_PLUGINS_DIR_ variable in the project makefile. By default is `/usr/lib/rabbitmq/plugins`.
+### Installation
 
 ```
 make dist 
