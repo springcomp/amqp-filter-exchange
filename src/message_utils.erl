@@ -3,13 +3,20 @@
 -include_lib("rabbit_common/include/rabbit.hrl").
 -include_lib("rabbit_common/include/rabbit_framing.hrl").
 
--export([create_message/2]).
+-export([create_message/2, get_message_header/1]).
 
 create_message(#delivery{message = #basic_message{content = Content}} = Message, Args) ->
     Actions = get_actions(Args),
     Headers = get_message_header(Content),
     NewHeaders = add_new_headers(Headers, Actions),
     set_delivery_headers(Message, NewHeaders).
+
+get_message_header(Content) ->     
+    Headers = rabbit_basic:extract_headers(Content),
+    case Headers of
+        undefined -> [];
+        _ -> Headers        
+    end.
 
 %%====================================================================
 %% Internal functions
@@ -48,13 +55,6 @@ set_delivery_headers(Delivery, Headers) ->
 get_msg(#delivery{message = Msg}) -> Msg.
 get_content(#basic_message{content = Content}) -> Content.
 get_props(#content{properties = Props}) -> Props.
-
-get_message_header(Content) ->     
-    Headers = rabbit_basic:extract_headers(Content),
-    case Headers of
-        undefined -> [];
-        _ -> Headers        
-    end.
 
 add_new_headers(Headers, []) -> sort_headers(Headers);
 add_new_headers(Headers, [H|Tail]) ->
@@ -129,6 +129,6 @@ add_new_headers_update_value_if_exist_test() ->
 
 -endif.
 
-%print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
+print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
 
 %%====================================================================

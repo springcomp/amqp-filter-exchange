@@ -44,8 +44,7 @@ description() ->
 
 serialise_events() -> false.
 
-route(#exchange{name = Name}, 
-      #delivery{message = #basic_message{content = Content}} = Delivery) ->        
+route(#exchange{name = Name}, #delivery{message = #basic_message{content = Content}} = Delivery) ->
     
     Routes =  match_exchange(Name),
     Headers = message_utils:get_message_header(Content),
@@ -99,6 +98,6 @@ evaluate(Key, Properties) ->
         _ -> Response            
     end.
 
-% print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
+print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
 
 %%====================================================================
