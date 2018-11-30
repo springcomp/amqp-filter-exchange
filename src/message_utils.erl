@@ -129,6 +129,6 @@ add_new_headers_update_value_if_exist_test() ->
 
 -endif.
 
-print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
+% print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
 
 %%====================================================================

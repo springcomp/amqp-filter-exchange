@@ -98,6 +98,6 @@ evaluate(Key, Properties) ->
         _ -> Response            
     end.
 
-print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
+% print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
 
 %%====================================================================
