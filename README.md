@@ -44,7 +44,7 @@ The actual version of this plugin uses Erlang/OTP 20 and RabbitMQ 3.7.0.
 RabbitMQ 3rd party [plugin directories](https://www.rabbitmq.com/plugins.html#plugin-directories) will differ from platform to platform and installation method to installation method.
 This plugin takes this path from the variable _RABBITMQ_PLUGINS_DIR_ in the makefile. You must verify and change his default value if needed. 
 
-### Creating distribution files and deploy
+### Installation
 
 ```
 make dist 
