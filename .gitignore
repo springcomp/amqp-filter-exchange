@@ -1,6 +1,7 @@
 .sw?
 .*.sw?
 *.beam
+rebar.lock
 /.erlang.mk/
 /cover/
 /deps/
@@ -8,6 +9,7 @@
 /ebin/
 /logs/
 /plugins/
+/_build/
 
 /rabbitmq_metronome.d
 erl_crash.dump

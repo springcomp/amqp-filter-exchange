@@ -30,11 +30,11 @@
    {?MODULE,
     [{description, "Amqp Filter Exchange"},
      {mfa,         {rabbit_registry, register,
-                    [exchange, <<"x-filter">>, ?MODULE]}},
+                    [exchange, <<"amqp-filter">>, ?MODULE]}},
      {requires,    rabbit_registry},
      {enables,     kernel_ready},
      {cleanup,     {rabbit_registry, unregister,
-                    [exchange, <<"x-filter">>]}}]}).
+                    [exchange, <<"amqp-filter">>]}}]}).
 
 info(_X) -> [].
 info(_X, _) -> [].
