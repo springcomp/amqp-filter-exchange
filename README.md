@@ -5,11 +5,11 @@ Also allows to modify the messages headers.
 
 ## Routing algorihtm
 
-The name of the new exchange type is _x-filter_.     
+The name of the new exchange type is _amqp-filter_.     
 Like other exchange types, the binding routing key is used by the routing algorithm. 
 In this case the binding routing key must be a predicate (SQL-like conditional expression). 
 This predicate may contain properties that must be present in the message header fields.        
-An exchange of type _x-filter_ will route a message to a queue if the queue has bound to the exchange with
+An exchange of type _amqp-filter_ will route a message to a queue if the queue has bound to the exchange with
 a binding routing key in form of predicate and the evaluation of this predicate using the message header fields returns _true_.     
 The message routing key is ignored.     
 
