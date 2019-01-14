@@ -11,7 +11,9 @@ convert_item({ Property_Name, array, Values }) ->
 convert_item({ Property_Name, Type, Value }) -> 
     { binary_to_list(Property_Name), get_value(Type, Value) }.
 
-get_value(Type, Value) when Type == long orelse Type == bool -> 
-    Value;
 get_value(longstr, Value) -> 
-    binary_to_list(Value).
+    binary_to_list(Value);
+get_value(_, Value) -> 
+    Value.
+
+% print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
