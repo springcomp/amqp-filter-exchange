@@ -1,14 +1,15 @@
 # AMQP Filter Exchange Plugin
 
 This plugin adds a new exchange type to [RabbitMQ](http://www.rabbitmq.com/) providing a new routing algorithm based on the evaluation of SQL92 predicates. 
-Also allows to modify the messages headers.
+Also allows to modify the message headers.
 
 ## Routing algorihtm
 
 The name of the new exchange type is _amqp-filter_.     
 Like other exchange types, the binding routing key is used by the routing algorithm. 
-In this case the binding routing key must be a predicate (SQL-like conditional expression). 
-This predicate may contain properties that must be present in the message header fields.        
+The binding routing key must be a valid predicate (SQL-like conditional expression). 
+This predicate may contain properties that must be present in the message header fields.    
+Due to the binding routing key property is limited to 256 characters, **the binding routing key must be specified in the binding arguments**. The queue arguments are a list of key-value pairs. The argument used to specify the routing key must have a key with the text `routingkey`, and a valid predicate as value.    
 An exchange of type _amqp-filter_ will route a message to a queue if the queue has bound to the exchange with
 a binding routing key in form of predicate and the evaluation of this predicate using the message header fields returns _true_.     
 The message routing key is ignored.     
