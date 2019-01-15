@@ -89,14 +89,24 @@ match_exchange(Name) ->
     ets:select(rabbit_route, [{MatchHead, [], ['$$']}]).
 
 filter(Routes, Properties) -> 
-    [{ Destination, Args } || [Destination, Key, Args] <- Routes, evaluate(Key, Properties) ].
+    % The Routes routingKey field is not used (is too short, max 255)
+    % The routingKey cames as argument with key='routingkey'
+    [{ Destination, Args } || [Destination, _, Args] <- Routes, evaluate(search_routingKey_argument(Args), Properties) ].
 
-evaluate(Key, Properties) ->
-    Response = amqp_filter:evaluate(binary_to_list(Key), Properties),
+evaluate(Predicate, Properties) ->
+    Response = amqp_filter:evaluate(Predicate, Properties),   
     case Response of
         unknown -> false;
         _ -> Response            
     end.
+
+search_routingKey_argument(Args) ->
+    Result = lists:foldl(fun({Key, longstr, Value}, Acc) when Key == <<"routingkey">> -> [Value] ++ Acc;(_, Acc) -> Acc end, [], Args),
+    case Result of
+        [RoutingKey] -> binary_to_list(RoutingKey);
+        _ -> []            
+    end.
+
 
 % print(Name, Value) -> io:format(Name ++ ": ~p~n", [Value]).
 
