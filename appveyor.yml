@@ -1,0 +1,19 @@
+image: ubuntu
+
+before_build:
+  - sh: apt-get update
+  - sh: apt-get install --yes autoconf
+  - sh: apt-get install --yes build-essential
+  - sh: apt-get install --yes fop
+  - sh: apt-get install --yes libncurses5-dev
+  - sh: apt-get install --yes libreadline-dev
+  - sh: apt-get install --yes libssl-dev
+  - sh: apt-get install --yes libwxgtk3.0-dev
+  - sh: apt-get install --yes libxml2-utils
+  - sh: apt-get install --yes m4
+  - sh: apt-get install --yes unixodbc
+  - sh: apt-get install --yes unixodbc-bin
+  - sh: apt-get install --yes unixodbc-dev
+  - sh: apt-get install --yes wx-common
+  - sh: apt-get install --yes xsltproc
+  - sh: apt-get install --yes zlib1g-dev
