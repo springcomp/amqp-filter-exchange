@@ -23,8 +23,14 @@ before_build:
   - sh: ./sources/asdf/bin/asdf plugin-add elixir
   - sh: ./sources/asdf/bin/asdf install elixir 1.6.6
   - sh: ./sources/asdf/bin/asdf global elixir 1.6.6
+  - sh: export PATH="$PATH:./sources/asdf/shims"
   - sh: git clone https://github.com/rabbitmq/rabbitmq-public-umbrella.git ./sources/rabbitmq-public-umbrella
   - sh: make -C ./sources/rabbitmq-public-umbrella co
 
 build_script:
   - sh: make dist
+
+artifacts:
+  - path: plugins/amqp_filter_exchange*.ez
+    name: plugin
+    type: file
