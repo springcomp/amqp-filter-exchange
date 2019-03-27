@@ -27,6 +27,8 @@ before_build:
   - sh: sudo apt-get install --yes zlib1g-dev
   - sh: git clone https://github.com/rabbitmq/rabbitmq-public-umbrella.git ./sources/rabbitmq-public-umbrella
   - sh: which elixir
+  - sh: cp ./sources/asdf/shims/elixir /bin
+  - sh: cp ./sources/asdf/shims/elixirc /bin
   - sh: make -C ./sources/rabbitmq-public-umbrella co
 
 build_script:
