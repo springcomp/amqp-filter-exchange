@@ -4,6 +4,7 @@ before_build:
   - sh: sudo apt-get update
   - sh: sudo apt-get install --yes autoconf
   - sh: sudo apt-get install --yes build-essential
+  - sh: sudo apt-get install --yes erlang-dev
   - sh: sudo apt-get install --yes fop
   - sh: sudo apt-get install --yes libncurses5-dev
   - sh: sudo apt-get install --yes libreadline-dev
