@@ -6,7 +6,7 @@ before_build:
   - sh: ./sources/asdf/bin/asdf plugin-add elixir
   - sh: ./sources/asdf/bin/asdf install elixir 1.6.6
   - sh: ./sources/asdf/bin/asdf global elixir 1.6.6
-  - sh: export PATH="$PATH:./sources/asdf/shims"
+  - sh: export PATH="$PATH:/home/appveyor/projects/amqp-filter-exchange/sources/asdf/shims"
   - sh: which elixir
   - sh: sudo apt-get update
   - sh: sudo apt-get install --yes autoconf
