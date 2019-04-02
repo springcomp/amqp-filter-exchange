@@ -1,4 +1,4 @@
-image: ubuntu
+image: ubuntu1804
 
 before_build:
   - sh: mkdir ./sources
