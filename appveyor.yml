@@ -4,7 +4,10 @@ before_build:
   - sh: mkdir ./sources
   - sh: git clone https://github.com/asdf-vm/asdf.git ./sources/asdf --branch v0.4.3
   - sh: ./sources/asdf/bin/asdf plugin-add elixir
+  - sh: ./sources/asdf/bin/asdf plugin-add erlang
+  - sh: ./sources/asdf/bin/asdf install erlang 21.0
   - sh: ./sources/asdf/bin/asdf install elixir 1.6.6
+  - sh: ./sources/asdf/bin/asdf global erlang 21.0
   - sh: ./sources/asdf/bin/asdf global elixir 1.6.6
   - sh: export PATH="$PATH:/home/appveyor/projects/amqp-filter-exchange/sources/asdf/shims"
   - sh: which elixir
