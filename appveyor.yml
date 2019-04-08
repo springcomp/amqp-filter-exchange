@@ -1,4 +1,4 @@
-image: ubuntu1804
+image: ubuntu
 
 before_build:
   - sh: docker build --tag private/rabbitmq-public-umbrella --file ./Dockerfile ./context/
