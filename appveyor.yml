@@ -1,0 +1,14 @@
+image: ubuntu
+
+before_build:
+  - sh: docker build --tag private/rabbitmq-public-umbrella --file ./Dockerfile ./context/
+
+build_script:
+  - sh: docker run --name rabbitmq --detach --mount "type=bind,source=/home/appveyor/projects/amqp-filter-exchange,target=/var/opt/amqp-filter-exchange" --entrypoint sleep private/rabbitmq-public-umbrella 5m
+  - sh: docker exec -i rabbitmq ls -l /var/opt/compile.sh
+  - sh: docker exec -i rabbitmq /var/opt/compile.sh
+
+artifacts:
+  - path: plugins/amqp_filter_exchange*.ez
+    name: plugin
+    type: file
