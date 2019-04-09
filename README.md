@@ -1,5 +1,7 @@
 # AMQP Filter Exchange Plugin
 
+[![Build status](https://ci.appveyor.com/api/projects/status/ep2n978dup5fg45t?svg=true)](https://ci.appveyor.com/project/pedroarmando/amqp-filter-exchange)
+
 This plugin adds a new exchange type to [RabbitMQ](http://www.rabbitmq.com/) providing a new routing algorithm based on the evaluation of SQL92 predicates. 
 Also allows to modify the message headers.
 
