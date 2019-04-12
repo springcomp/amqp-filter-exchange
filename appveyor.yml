@@ -16,7 +16,7 @@ artifacts:
     type: file
 
 deploy:
-  release: amqp-filter-exchange-v$(appveyor_build_version)
+  release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'Release description'
   provider: GitHub
   auth_token:
