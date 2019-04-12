@@ -1,5 +1,9 @@
 image: ubuntu
 
+environment:
+  github_auth_token:
+    secure: OCMyGTAT++mBzpAtCFokNrb6HW/uppvgWXcW4w0vIxFEpFBdS37eS5zle+4UQ5Je
+
 before_build:
   - sh: docker build --tag private/rabbitmq-public-umbrella --file ./Dockerfile ./context/
 
@@ -16,7 +20,7 @@ deploy:
   description: 'Release description'
   provider: GitHub
   auth_token:
-    secure: 919fcb6e82d171017378d09392fbf58adfb665ce 
+    secure: $Env:github_auth_token
   artifact: /.*\.ez
   draft: false
   prerelease: false
