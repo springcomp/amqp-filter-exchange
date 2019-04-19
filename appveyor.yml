@@ -20,7 +20,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: $Env:github_auth_token
-  artifact: /.*\.ez
+  artifact: /.*amqp_filter_exchange\-[0-9a-z\.\+]+\.ez/
   draft: false
   prerelease: false
   on:
