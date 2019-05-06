@@ -10,8 +10,13 @@ before_build:
 build_script:
   - sh: docker run --rm --mount "type=bind,source=/home/appveyor/projects/amqp-filter-exchange,target=/var/opt/amqp-filter-exchange" private/rabbitmq-public-umbrella
 
+after_build:
+  - sh: 7z a amqp_filter_exchange.zip /home/appveyor/projects/amqp-filter-exchange/plugins/amqp_filter_exchange*.ez
+  - sh: 7z a amqp_filter_exchange.zip /home/appveyor/projects/amqp-filter-exchange/plugins/amqp_filter*.ez
+  - sh: 7z a amqp_filter_exchange.zip /home/appveyor/projects/amqp-filter-exchange/plugins/action_reader*.ez
+
 artifacts:
-  - path: plugins/amqp_filter_exchange*.ez
+  - path: amqp_filter_exchange.zip
     name: plugin
     type: file
 
@@ -20,7 +25,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: $Env:github_auth_token
-  artifact: /.*amqp_filter_exchange\-[0-9a-z\.\+]+\.ez/
+  artifact: /amqp_filter_exchange\.zip/
   draft: false
   prerelease: false
   on:
